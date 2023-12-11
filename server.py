@@ -63,7 +63,7 @@ def receive_data():
 
     while True:
         data, client_address = server_socket.recvfrom(1024)
-        command = data.decode('utf-8')  # Decode the received data
+        command = data.decode('utf-8')
         print(command)
         if command:
             try:
@@ -86,15 +86,20 @@ def main():
 
     root = tk.Tk()
     root.title("Сервер")
-    canvas = tk.Canvas(root, width=800, height=600)
+    root.configure(bg="#8FBC8F")
+    canvas_frame = tk.Frame(root, bd=2, relief=tk.GROOVE)
+    canvas_frame.grid(row=0, column=0, padx=10, pady=10)
+
+    canvas = tk.Canvas(canvas_frame, width=800, height=600, bg="white")
     canvas.pack()
 
-    text_area = tk.Text(root, height=25, width=50)
+    text_frame = tk.Frame(root, bd=2, relief=tk.GROOVE)
+    text_frame.grid(row=0, column=1, padx=10, pady=10)
+
+    text_area = tk.Text(text_frame, height=25, width=50)
     text_area.pack()
 
     print("Сервер запущено")
-
-    # Запуск функції отримання команд у окремому потоці
     receive_thread = threading.Thread(target=receive_data)
     receive_thread.daemon = True
     receive_thread.start()

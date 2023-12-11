@@ -19,15 +19,16 @@ def main():
 
     root = tk.Tk()
     root.title("Кліент")
+    root.configure(bg="#ADD8E6")
 
-    canvas = tk.Canvas(root, width=700, height=10)
-    canvas.pack()
+    entry_frame = tk.Frame(root, bd=2, relief=tk.GROOVE)
+    entry_frame.pack(padx=10, pady=10)
 
-    entry = tk.Entry(root, width=100)
-    entry.pack()
+    entry = tk.Entry(entry_frame, width=100)
+    entry.pack(side=tk.LEFT)
 
-    send_button = tk.Button(root, text="Send Command", command=send_command)
-    send_button.pack()
+    send_button = tk.Button(entry_frame, text="Send Command", command=send_command)
+    send_button.pack(side=tk.LEFT, padx=5)
 
     root.mainloop()
 
